@@ -1,0 +1,4 @@
+CrystalsKyber KEYWORD1
+crypto_kem_keypair  KEYWORD2
+crypto_kem_enc  KEYWORD2
+crypto_kem_dec  KEYWORD2
