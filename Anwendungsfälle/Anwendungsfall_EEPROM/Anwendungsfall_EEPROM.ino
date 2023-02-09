@@ -4,6 +4,7 @@
 #include <EEPROM.h>
 
 uint8_t sk[CRYPTO_SECRETKEYBYTES];
+uint8_t pk[CRYPTO_PUBLICKEYBYTES];
 
 void keygen() {
   uint8_t pk[CRYPTO_PUBLICKEYBYTES];  //public key that shall be sent to the other communication party
@@ -56,6 +57,21 @@ void print_sk() {
   }
   Serial.println("]");
 }
+
+void print_pk() {
+  Serial.print("[");
+  for (int i = 0; i < CRYPTO_PUBLICKEYBYTES; i++) {
+    if (i % 100) {
+      Serial.print(sk[i]);
+      Serial.print(",");
+    } else {
+      Serial.print(pk[i]);
+      Serial.println(",");
+    }
+  }
+  Serial.println("]");
+}
+
 
 void compare_sk() {
   bool equal = true;
@@ -129,8 +145,12 @@ void loop() {
       break;
     case 6:
       // temp sensor code goes here
-      Serial.println("Print SK to the Serial Monitor.");
+      Serial.println("Print PK to the Serial Monitor.");
+      Serial.println(String(CRYPTO_PUBLICKEYBYTES) + " Bytes");
       print_sk();
+      Serial.println("Print SK to the Serial Monitor.");
+      Serial.println(String(CRYPTO_SECRETKEYBYTES) + " Bytes");
+      print_pk();
       break;
     case 7:
       // temp sensor code goes here
@@ -141,3 +161,5 @@ void loop() {
       Serial.println("Please choose a valid selection");
   }
 }
+
+
